@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <% if (page.type === 'tags' || page.type === 'tag') { %>
+            <%- partial('_partial/header.ejs', {logoIcon: page.logoIcon || 'fa-tags', headerTitle: page.title}) %>
+            <section class="main archive-container">
+                <% site.tags.forEach(function(tag) { %>
+                    <%- partial('_partial/tag-cat-item', {item: {path: tag.path, title: '#' + tag.name}}) %>
+                <% }); %>
+            </section>
+        <% } else if (page.type === 'categories' || page.type === 'category') { %>
+            <%- partial('_partial/header.ejs', {logoIcon: page.logoIcon || 'fa-folder-open', headerTitle: page.title}) %>
+            <section class="main archive-container">
+                <% site.categories.forEach(function(cat) { %>
+                    <%- partial('_partial/tag-cat-item', {item: {path: cat.path, title: cat.name}}) %>
+                <% }); %>
+            </section>
+        <% } else { %>
+            <%- partial('_partial/header.ejs', {logoIcon: page.logoIcon, headerTitle: ''}) %>
+            <section class="main">
+                <article class="article">
+                    <header class="article-header">
+                        <h1 class="article-title"><%= page.title %></h1>
+                    </header>
+                    <div class="article-entry">
+                        <%- page.content %>
+                    </div>
+                </article>
+            </section>
+        <% } %>
+    </div>
+</div>
